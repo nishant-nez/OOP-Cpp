@@ -1,50 +1,93 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
-class Rectangle 
+class Dog
 {
-	private:
-		int length;
-		int breadth;
-	public:
-		//constructor (no arg){khali cha}
-		Rectangle() :length(5), breadth(5)
-		{ }
-		
-		//constructor (two args){int,int}
-		Rectangle(int len, int brd ) : length(len), breadth(brd)
-		{ }
-		
-		void setLength(int l) {length = l;}
-		int getLength() {return length;}
-		void setBreadth(int b) {breadth = b;}
-		int getBreadth() {return breadth;} 
-			
-		long calcArea();
+private:
+	string color;
+	string breed;
+	int age;
 
+public:
+	Dog() : color("black"), breed("husky"), age(6)
+	{
+	}
+	void setcolor(string colorofthedog)
+	{
+		color = colorofthedog;
+	}
+	string getcolor()
+	{
+		return color;
+	}
+	void setbreed(string breedofthedog)
+	{
+		breed = breedofthedog;
+	}
+	string getbreed()
+	{
+		return breed;
+	}
+	void setage(int ageofthedog)
+	{
+		age = ageofthedog;
+	}
+	int getage()
+	{
+		return age;
+	}
+	string vaccinated(int answer)
+	{
+		if (answer == 2)
+		{
+			return "fully";
+		}
+		else
+		{
+			return "not";
+		}
+	}
+
+	bool operator>(Dog);
 };
 
-long Rectangle::calcArea()
+bool Dog::operator>(Dog dg)
 {
-return length * breadth;
+	return age > dg.getage();
 }
 
 int main()
 {
-	int l,b;
-	Rectangle rec1(10, 5); //two-arg constructor
-	
-	cout << "Enter length:"<<endl;
-	cin >> l;
-	cout << "Enter breadth:"<<endl;
-	cin >> b;
-	
-	Rectangle rec2(l,b); //arg constructor
-	Rectangle rec3 = rec1; //one-arg constructor
-	
-	cout << "\narea1 ="<< rec1.calcArea();
-	cout << "\narea2 = "<<rec2.calcArea();
-	cout << "\narea3 ="<< rec3.calcArea();
-	cout << endl;
-	return 0;
+	Dog leo;
+	int vaccinenumber;
+	cout << "how many times has your first dog taken the vaccine for rabies";
+	cin >> vaccinenumber;
+	cout << "the color of your dog is:" << leo.getcolor() << endl;
+	cout << "the breed of your dog is:" << leo.getbreed() << endl;
+	cout << "the age of you dog is:" << leo.getage() << endl;
+	cout << "your dog is " << leo.vaccinated(vaccinenumber) << " vaccinated against rabies" << endl
+		 << endl;
+
+	Dog jacky;
+	jacky.setage(9);
+	jacky.setbreed("Pitbull");
+	jacky.setcolor("Brown");
+
+	cout << "how many times has your second dog taken the vaccine for rabies";
+	cin >> vaccinenumber;
+	cout << "the color of your dog is:" << jacky.getcolor() << endl;
+	cout << "the breed of your dog is:" << jacky.getbreed() << endl;
+	cout << "the age of you dog is:" << jacky.getage() << endl;
+	cout << "your dog is " << jacky.vaccinated(vaccinenumber) << " vaccinated against rabies" << endl
+		 << endl;
+
+	if (leo > jacky)
+	{
+		cout << leo.getbreed() << " is older." << endl;
+	}
+	else
+	{
+		cout << jacky.getbreed() << " is older." << endl;
+	}
 }
