@@ -1,6 +1,6 @@
 /*
  *
- * Program : To implement a real world Class (LightBulb) with operator overloading
+ * Program : To implement a real world Class (LightBulb) with and derive new class
  * Author : Nishant Khadka
  * Date : 18/02/2022
  *
@@ -12,7 +12,7 @@ using namespace std;
 float rate = 8.290;
 
 class LightBulb {
-	private:
+	protected:
 		string brand;
 		float wattage;
 		bool isLed;
@@ -66,6 +66,38 @@ class LightBulb {
 		int operator +(int);
 		bool operator >(LightBulb);
 		float operator *(LightBulb);
+
+};
+
+// DERIVED CLASS
+
+class AdvLightbulb : public LightBulb {
+	private:
+		int lumens;
+
+	public:
+		AdvLightbulb(string bulb, int watt, bool led, int lumn) : LightBulb(bulb, watt, led), lumens(lumn) {}
+
+		float calcLumens() {
+			if(isLed) {
+				return 18*wattage;
+			}
+			else {
+				return 12*wattage;
+			}
+		}
+
+		const char *top10[10] = {"bajaj", "fiem", "ge", "havells", "osram", "pharox", "philips", "surya", "syska"};
+
+		bool isTop10() {
+			// for (int i = 0; i < 10; i++)
+			// {
+			// 	int check;
+			// }
+
+			
+		}
+
 
 };
 
