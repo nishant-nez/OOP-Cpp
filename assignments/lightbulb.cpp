@@ -8,118 +8,9 @@
  */
 
 #include<iostream>
+#include"ModernLightbulb.h"
+
 using namespace std;
-float rate = 8.290;
-
-class LightBulb {
-	protected:
-		string brand;
-		float wattage;
-		bool isLed;
-		
-	public:
-//		LightBulb() {}
-		// Default Constructor
-		LightBulb(): brand("Philips"), wattage(60), isLed(true) {	}
-		
-		// Overloaded Constructor
-		LightBulb(string company, float watt, bool led): brand(company), wattage(watt<0?0:watt), isLed(led) {}
-				
-		// Destructor
-		~LightBulb() {}
-
-		void setBrand(string company) { brand = company; }
-		string getBrand() { return brand; }
-		
-		void setWattage(float watt) { 
-			if(watt<0) {
-				wattage = 0;
-			}
-			else {
-				wattage = watt; 
-			}
-		}
-		float getWattage() { return wattage; }
-		
-		void setLed(bool led) { isLed = led; } 
-		bool getisLed() { return isLed;	}
-		
-		float calcConsumption () {
-			return wattage*24/1000;
-		}
-		
-		float calcWastage () {
-			if(isLed) {	
-				return 10.0/100.0*calcConsumption();
-			}
-			else {
-				return 90.0/100.0*calcConsumption();
-			}
-		}
-		
-		float calcPrice () {
-			return rate*calcConsumption();
-		}
-		
-		// operator overloading
-		LightBulb operator ++();
-		int operator +(int);
-		bool operator >(LightBulb);
-		float operator *(LightBulb);
-
-};
-
-// DERIVED CLASS
-
-class AdvLightbulb : public LightBulb {
-	private:
-		int lumens;
-
-	public:
-		AdvLightbulb(string bulb, int watt, bool led, int lumn) : LightBulb(bulb, watt, led), lumens(lumn) {}
-
-		float calcLumens() {
-			if(isLed) {
-				return 18*wattage;
-			}
-			else {
-				return 12*wattage;
-			}
-		}
-
-		const char *top10[10] = {"bajaj", "fiem", "ge", "havells", "osram", "pharox", "philips", "surya", "syska"};
-
-		bool isTop10() {
-			// for (int i = 0; i < 10; i++)
-			// {
-			// 	int check;
-			// }
-
-			
-		}
-
-
-};
-
-
-LightBulb LightBulb::operator ++() {
-	LightBulb otemp;
-	otemp.setWattage(++wattage);
-	return otemp;
-}
-
-int LightBulb::operator +(int addValue) {
-	return wattage + addValue;
-}
-
-bool LightBulb::operator >(LightBulb bulb) {
-	return calcConsumption()>bulb.calcConsumption();
-}
-
-float LightBulb::operator *(LightBulb bulb) {
-	return (calcPrice() + bulb.calcPrice()) * 30; 
-}
-
 
 int main()
 {
@@ -222,8 +113,20 @@ int main()
 	
 	cout << "\nThe total electricity price of " << Bulb_Philips.getBrand() << "'s and " << Bulb_Himstar.getBrand() << "'s bulb in a month is : Rs." << Bulb_Philips*Bulb_Himstar; 
 	cout << "\nThe total electricity price of " << Bulb_Himstar.getBrand() << "'s and " << Bulb_User.getBrand() << "'s bulb in a month is : Rs." << Bulb_Himstar*Bulb_User;
-	cout << "\nThe total electricity price of " << Bulb_Philips.getBrand() << "'s and " << Bulb_User.getBrand() << "'s bulb in a month is : Rs." << Bulb_Philips*Bulb_User;
+	cout << "\nThe total electricity price of " << Bulb_Philips.getBrand() << "'s and " << Bulb_User.getBrand() << "'s bulb in a month is : Rs." << Bulb_Philips*Bulb_User << endl << endl;
+
+	// Object of ModernLightbulb
+	ModernLightbulb mdBulb("bajaj", 65, true, "E17");
 	
+	cout << "Electricity consumption for modern light bulb in a day is: " << mdBulb.calcConsumption() << "kWh" << endl;
+
+	if(mdBulb.isBright()){
+		cout<<"The Modern Bulb is very bright for a normal room."<<endl;;
+	}
+	else {
+		cout<<"The Modern Bulb has enought brightness for a normal room."<<endl;
+	}
+	// cout <<"test";
 	return 0;
 }
 	
