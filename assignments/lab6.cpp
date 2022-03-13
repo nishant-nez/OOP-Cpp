@@ -6,7 +6,7 @@ class Author {
         string name;
         string email;
         char gender;
-
+    
     public:
         Author(){};
         Author(string nm, string em, char g):name(nm), email(em), gender(g) {};
