@@ -1,4 +1,5 @@
 #include<iostream>
+#include"Exceptions.h"
 float rate = 8.290;
 
 using namespace std;
@@ -28,7 +29,8 @@ public:
     {
         if (watt < 0)
         {
-            wattage = 0;
+            throw NegativeValueException("Wattage", watt);
+            wattage=0;
         }
         else
         {

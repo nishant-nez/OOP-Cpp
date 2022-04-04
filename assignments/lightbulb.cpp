@@ -1,8 +1,9 @@
 /*
  *
  * Program : To implement a real world Class (LightBulb) with and derive new class
+ *  inclusion of exception
  * Author : Nishant Khadka
- * Date : 18/02/2022
+ * Date : 30/03/2022
  *
  *
  */
@@ -11,6 +12,7 @@
 #include"ModernLightbulb.h"
 
 using namespace std;
+
 
 int main()
 {
@@ -42,7 +44,12 @@ int main()
 	
 	LightBulb Bulb_User = Bulb_Philips;
 	Bulb_User.setBrand(brand);
-	Bulb_User.setWattage(wattage);
+	// exception
+	try {
+		Bulb_User.setWattage(wattage);
+	} catch(NegativeValueException hw) {
+		cout << hw.prompt << " could not be set. (value = " << hw.value << ")" << endl;
+	}
 	Bulb_User.setLed(led);
 	
 	cout << "\nFor Default Constructor values (" << Bulb_Philips.getBrand() << "'s ";
@@ -118,15 +125,28 @@ int main()
 	// Object of ModernLightbulb
 	ModernLightbulb mdBulb("bajaj", 65, true, "E17");
 	
-	cout << "Electricity consumption for modern light bulb in a day is: " << mdBulb.calcConsumption() << "kWh" << endl;
+	cout << "Electricity consumption for modern light bulb in a day is: " << mdBulb.calcConsumption() << "kWh" << endl << endl;
 
-	if(mdBulb.isBright()){
-		cout<<"The Modern Bulb is very bright for a normal room."<<endl;;
+
+
+
+	LightBulb nw;
+
+	try {
+		nw.setWattage(-1);
+
+	} catch(NegativeValueException ne) {
+		cout << ne.prompt << " cannot be negative. (value = " << ne.value << ")" << endl;
 	}
-	else {
-		cout<<"The Modern Bulb has enought brightness for a normal room."<<endl;
+
+	ModernLightbulb mdl;
+
+	try {
+		mdl.setbaseType("E17");
+	} catch(BaseTypeException bt) {
+		cout << bt.prompt << " with value = " << bt.value << endl;
 	}
-	// cout <<"test";
+
 	return 0;
 }
 	

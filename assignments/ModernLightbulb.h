@@ -1,6 +1,6 @@
 #include<iostream>
 #include"LightBulb.h"
-
+// #include "Exceptions.h"
 using namespace std;
 
 // DERIVED CLASS
@@ -16,7 +16,12 @@ public:
 
     void setbaseType(string bt)
     {
-        baseType = bt;
+        if(bt=="E17") {
+            throw BaseTypeException("Base Type Error", bt);
+        }
+        else {
+            baseType = bt;
+        }
     }
     string getbaseType()
     {
