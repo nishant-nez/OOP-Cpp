@@ -1,17 +1,18 @@
 /*
  *
  * Program : To implement a real world Class (LightBulb) with and derive new class
- *  inclusion of exception
+ *  inclusion of FILE READ/WRITE
  * Author : Nishant Khadka
- * Date : 30/03/2022
+ * Date : 07/04/2022
  *
  *
  */
 
 #include<iostream>
+#include<fstream>
 #include"ModernLightbulb.h"
 
-using namespace std;
+using namespace std; 
 
 
 int main()
@@ -146,6 +147,41 @@ int main()
 	} catch(BaseTypeException bt) {
 		cout << bt.prompt << " with value = " << bt.value << endl;
 	}
+
+
+	// OBJECT I/O
+	string filename;
+
+	// WRITE
+	cout << endl << "Enter the bulb whose data you want to write into file (1/2/3): "<<endl;
+	cin >> choice;
+	cout << "Enter your filename: ";
+	cin >> filename;
+	
+	if(choice==1) {
+		ofstream filezero(filename, ios::binary);
+		filezero.write(reinterpret_cast<char*>(&Bulb_Philips), sizeof(Bulb_Philips));
+	}
+	else if(choice==2) {
+		ofstream fileone(filename, ios::binary);
+		fileone.write(reinterpret_cast<char*>(&Bulb_Himstar), sizeof(Bulb_Himstar));
+	}
+	else {
+		ofstream filetwo(filename, ios::binary);
+		filetwo.write(reinterpret_cast<char*>(&Bulb_User), sizeof(Bulb_User));
+	}
+	cout << "File written successfully!" << endl;
+
+	cout << endl << "Content of the file : " << endl;
+	
+
+	//READ
+	LightBulb fileData;
+	ifstream bulbread(filename, ios::binary);
+	bulbread.read(reinterpret_cast<char*>(&fileData), sizeof(fileData));
+	cout << "Brand Name : " << fileData.getBrand() << endl;
+	cout << "Wattage : " << fileData.getWattage() << endl;
+	cout << "LED type : " << (fileData.getisLed()?"LED":"NOT LED");
 
 	return 0;
 }
