@@ -21,11 +21,11 @@ void Currency::display() {
 
 Currency::Currency(float dlr) {
 	dollar = int(dlr);
-	cents = int(cents);
+	cents = (dlr-dollar)*100;
 }
 
 Currency::operator float() {
-	return (dollar+cents/100);
+	return (dollar+cents/100.0);
 }
 
 int main() {

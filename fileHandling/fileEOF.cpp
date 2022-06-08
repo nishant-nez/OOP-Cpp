@@ -9,7 +9,7 @@ int main()
     char buffer[MAX];
     ifstream infile("data2.txt");
     while(!infile.eof()) {
-        infile.getline(buffer, MAX);
+        infile.getline(buffer, sizeof(buffer));
         cout << buffer << endl;
     }
 }

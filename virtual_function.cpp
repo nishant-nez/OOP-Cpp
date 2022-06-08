@@ -5,13 +5,13 @@ class Base {
     public:
         // virtual void show() = 0;
 
-        virtual void show() {
-            cout << "Base Class" << endl;
-        }
-
-        // void show() {
+        // virtual void show() {
         //     cout << "Base Class" << endl;
         // }
+
+        void show() {
+            cout << "Base Class" << endl;
+        }
 };
 
 class Derv1 : public Base {

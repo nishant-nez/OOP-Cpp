@@ -1,93 +1,62 @@
-#include <iostream>
-#include <string>
+// Define an abstract class called Student with necessary attributes and their types along with desired member functions. Also,
+// a. Derive Computer Science and Mathematics classes from the Student class adding at least three subjects as attributes as well as the constructor.
+// b. Use these classes in a main program and display the average marks of computer science and mathematics students
+
+#include<iostream>
 using namespace std;
 
-class Dog
-{
-private:
-	string color;
-	string breed;
-	int age;
+class Student{
+    protected:
+    string name;
+    int rollNo;
 
-public:
-	Dog() : color("black"), breed("husky"), age(6)
-	{
-	}
-	void setcolor(string colorofthedog)
-	{
-		color = colorofthedog;
-	}
-	string getcolor()
-	{
-		return color;
-	}
-	void setbreed(string breedofthedog)
-	{
-		breed = breedofthedog;
-	}
-	string getbreed()
-	{
-		return breed;
-	}
-	void setage(int ageofthedog)
-	{
-		age = ageofthedog;
-	}
-	int getage()
-	{
-		return age;
-	}
-	string vaccinated(int answer)
-	{
-		if (answer == 2)
-		{
-			return "fully";
-		}
-		else
-		{
-			return "not";
-		}
-	}
+    public:
+    virtual int avg()=0;
+    Student(){}
+    Student(string nam, int roll):name(nam),rollNo(roll){}
 
-	bool operator>(Dog);
+    
+
+
 };
 
-bool Dog::operator>(Dog dg)
-{
-	return age > dg.getage();
-}
+class ComputerScience:public Student{
+    private:
+    int m1; int m2; int m3;
 
-int main()
-{
-	Dog leo;
-	int vaccinenumber;
-	cout << "how many times has your first dog taken the vaccine for rabies";
-	cin >> vaccinenumber;
-	cout << "the color of your dog is:" << leo.getcolor() << endl;
-	cout << "the breed of your dog is:" << leo.getbreed() << endl;
-	cout << "the age of you dog is:" << leo.getage() << endl;
-	cout << "your dog is " << leo.vaccinated(vaccinenumber) << " vaccinated against rabies" << endl
-		 << endl;
+    public:
+    ComputerScience(){}
+    ComputerScience(int marks1, int marks2, int marks3):m1(marks1),m2(marks2),m3(marks3){}
 
-	Dog jacky;
-	jacky.setage(9);
-	jacky.setbreed("Pitbull");
-	jacky.setcolor("Brown");
+    int avg(){
+        return (m1+m2+m3)/3;
+    }
+    
 
-	cout << "how many times has your second dog taken the vaccine for rabies";
-	cin >> vaccinenumber;
-	cout << "the color of your dog is:" << jacky.getcolor() << endl;
-	cout << "the breed of your dog is:" << jacky.getbreed() << endl;
-	cout << "the age of you dog is:" << jacky.getage() << endl;
-	cout << "your dog is " << jacky.vaccinated(vaccinenumber) << " vaccinated against rabies" << endl
-		 << endl;
+};
 
-	if (leo > jacky)
-	{
-		cout << leo.getbreed() << " is older." << endl;
-	}
-	else
-	{
-		cout << jacky.getbreed() << " is older." << endl;
-	}
+class Mathematics:public Student{
+
+    private:
+    int s1; int s2; int s3;
+
+    public:
+    Mathematics(){}
+    Mathematics(int score1,int score2, int score3):s1(score1),s2(score2),s3(score3){}
+
+    int avg(){
+        return (s1+s2+s3)/3;
+    }
+
+};
+
+int main(){
+    
+    ComputerScience cs(70,80,90);
+    Mathematics m(10,20,30);
+
+    cout<<"Average marks of Computerscience is: "<<cs.avg()<<endl;
+    cout<<"Average marks of Mathematics is: "<<m.avg()<<endl;
+
+
 }
